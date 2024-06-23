@@ -17,7 +17,13 @@ public class AEntity : MonoBehaviour, IHealth
     protected virtual void Start()
     {        
         GameEventManager.instance.Subscribe(EventType.OnCardDraw, AddCardToHand);
-        cardDeck.Start();
+        GameEventManager.instance.Subscribe(EventType.OnTurnStart, DrawCard);
+        GameEventManager.instance.Subscribe(EventType.OnTurnStart, TurnStart);
+
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+        Debug.Log("Subscribe deck");
+        
     }
 
     public void TakeDamage(int damage)
@@ -30,5 +36,18 @@ public class AEntity : MonoBehaviour, IHealth
     public virtual void AddCardToHand(object[] argV)
     {
         
+    }
+
+    
+    public virtual void DrawCard(object[] argV)
+    {
+        
+
+    }
+
+    public virtual void TurnStart(object[] argV)
+    {
+        currentHealth = maxHealth;
+        currentMana = maxMana;
     }
 }
