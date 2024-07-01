@@ -17,10 +17,10 @@ public class UnityEventObj : UnityEvent<Func<object[]>>
 
 public enum EventType
 {
-    OnTurnStart, 
-    OnTurnEnd, 
-    OnCardDraw, 
-    OnCardDestroy,
-    OnCardPlay,
-    OnDamage
+    OnTurnStart=1, 
+    OnTurnEnd = 2, 
+    OnCardDraw = 4, 
+    OnCardDestroy = 8,
+    OnCardPlay = 16,
+    OnDamage = 32
 }

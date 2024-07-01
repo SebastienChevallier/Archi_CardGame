@@ -22,6 +22,7 @@ public class GameEventManager : MonoBehaviour
         if (events.ContainsKey(type))
         {
             events[type] += myFunction;
+            Debug.Log("Subscribe : " +  type.ToString());
         }
         else
         {
@@ -35,6 +36,7 @@ public class GameEventManager : MonoBehaviour
         if (events.ContainsKey(type))
         {
             events[type] -= myFunction;
+            Debug.Log("Unsubscribe : " + type.ToString());
         }
         
     }
@@ -43,6 +45,7 @@ public class GameEventManager : MonoBehaviour
     {
         if (events.ContainsKey(type))
         {
+            Debug.Log("Call : " + type.ToString());
             events[type](argV);
         }        
     }

@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d425cb2411e864db3dc45843a30f9a, type: 3}
-  m_Name: DebugEffect
+  m_Script: {fileID: 11500000, guid: 7592728be6b80ea4b9a7c492089c7c86, type: 3}
+  m_Name: DrawOnDamage
   m_EditorClassIdentifier: 
-  name: DebugEffect
-  description: C'est une carte inutile
-  cost: 2
+  name: 
+  description: 
+  cost: 0
+  numberOfTurn: 10
+  entityPlaying: 0

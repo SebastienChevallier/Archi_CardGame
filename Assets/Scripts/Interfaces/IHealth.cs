@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHealth
 {
-    public void TakeDamage(int damage);
+    public void TakeDamage(int damage, object[] argV);
 }
