@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65647a87d585c054e9f2cc8cb3bafe04, type: 3}
-  m_Name: FireBall
+  m_Name: FireBall_Lvl4
   m_EditorClassIdentifier: 
   name: FireBall
-  description: 'Inflict 10 '
-  cost: 1
-  damageValue: 10
+  description: Inflict 40
+  cost: 7
+  damageValue: 40

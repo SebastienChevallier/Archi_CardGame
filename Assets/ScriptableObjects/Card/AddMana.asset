@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65647a87d585c054e9f2cc8cb3bafe04, type: 3}
-  m_Name: FireBall
+  m_Script: {fileID: 11500000, guid: a8a840e8041208942b035a9f32d158ac, type: 3}
+  m_Name: AddMana
   m_EditorClassIdentifier: 
-  name: FireBall
-  description: 'Inflict 10 '
-  cost: 1
-  damageValue: 10
+  name: Mana
+  description: Add 3 mana
+  cost: 0
+  manaValue: 3

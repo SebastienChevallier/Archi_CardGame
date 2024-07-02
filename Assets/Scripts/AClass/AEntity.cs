@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,8 @@ public class AEntity : MonoBehaviour, IHealth
 
     public Slider sliderLife;
     public Slider sliderMana;
+    public TextMeshProUGUI lifeText;
+    public TextMeshProUGUI manaText;
 
     private void Awake()
     {
@@ -33,12 +36,14 @@ public class AEntity : MonoBehaviour, IHealth
         {
             sliderLife.maxValue = maxHealth;
             sliderLife.value = currentHealth;
+            if (lifeText) lifeText.text = currentHealth.ToString();
         }
 
         if (sliderMana)
         {
             sliderMana.maxValue = maxMana;
             sliderMana.value = currentMana;
+            if (manaText) manaText.text = currentMana.ToString();
         }
     }
 
@@ -56,6 +61,7 @@ public class AEntity : MonoBehaviour, IHealth
         if(sliderLife)
         {
             sliderLife.value = currentHealth;
+            if (lifeText) lifeText.text = currentHealth.ToString();
         }
         //Debug.Log("Dmg");
 
@@ -74,6 +80,7 @@ public class AEntity : MonoBehaviour, IHealth
         if (sliderLife)
         {
             sliderLife.value = currentHealth;
+            if (lifeText) lifeText.text = currentHealth.ToString();
         }           
     }
 
@@ -86,6 +93,7 @@ public class AEntity : MonoBehaviour, IHealth
             if (sliderMana)
             {
                 sliderMana.value = currentMana;
+                if (manaText) manaText.text = currentMana.ToString();
             }
             return true;
         }

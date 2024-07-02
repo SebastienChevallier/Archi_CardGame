@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using static UnityEditor.Progress;
 
 public class PlayerController : AEntity
 {
-    public GameObject handParent;
-    
+    public GameObject handParent;    
 
     public override void AddCardToHand(object[] argV)
     {
@@ -17,14 +18,18 @@ public class PlayerController : AEntity
         Card card = obj.GetComponent<Card>();
         card.cardData = (AEffect)argV[3];
         card.Init();
-        hand.Add(card);
+        hand.Add(card);        
     }
+
+    
 
     public override void DrawCard(object[] argV)
     {
         base.DrawCard(argV);
 
         if ((PlayingEntity)argV[0] == PlayingEntity.Ennemy) { return; }
+
+        if(hand.Count > 6) { return; }
 
         if(deck.Count > 0)
         {
@@ -46,4 +51,6 @@ public class PlayerController : AEntity
         if ((PlayingEntity)argV[0] == PlayingEntity.Ennemy) return;
         base.TurnStart(argV);        
     }
+
+    
 }

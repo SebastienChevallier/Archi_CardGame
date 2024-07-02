@@ -20,6 +20,7 @@ public class HealOnDraw : Status
             if (nbTurnActive < numberOfTurn)
             {
                 origin.Heal(amountToHeal);
+                nbTurnActive++;
             }
             else
             {
