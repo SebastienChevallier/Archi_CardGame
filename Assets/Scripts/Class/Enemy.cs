@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : AEntity
@@ -7,12 +8,12 @@ public class Enemy : AEntity
     public CombatManager CombatManager;
     public override void AddCardToHand(object[] argV)
     {
-        if ((PlayingEntity)argV[1] == PlayingEntity.Player) { return; }
+        if ((PlayingEntity)argV[0] == PlayingEntity.Player) { return; }
 
         GameObject obj = Instantiate(prefabCard);
         Card card = obj.GetComponent<Card>();
         obj.SetActive(false);
-        card.cardData = (AEffect)argV[0];
+        card.cardData = (AEffect)argV[3];
         hand.Add(card);
 
         //Debug.Log("AddCard to hand");
@@ -24,12 +25,17 @@ public class Enemy : AEntity
 
         if ((PlayingEntity)argV[0] == PlayingEntity.Player) { return; }
 
-        if (cardDeck.deck.Count > 0)
+        if (deck.Count > 0)
         {
-            AEffect effect = cardDeck.deck[cardDeck.deck.Count - 1];
-            cardDeck.deck.Remove(effect);
-            var arg = new object[] { effect, argV[0], argV[2], argV[1] };
+            AEffect effect = deck[deck.Count - 1];
+            deck.Remove(effect);
+            var arg = new object[] { argV[0], argV[2], argV[1], effect};
             GameEventManager.instance.CallEvent(EventType.OnCardDraw, arg);
+        }
+        else
+        {
+            deck = definitiveDeck.CloneViaSerialization();
+            deck.Shuffle();
         }
     }
 

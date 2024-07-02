@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29cb7350330849846b1022af53196b15, type: 3}
-  m_Name: ApplyStatusOnDraw
+  m_Script: {fileID: 11500000, guid: b821879d824f5ef47b0c9ac08769fdeb, type: 3}
+  m_Name: ApplyHealOnBeginTurn
   m_EditorClassIdentifier: 
-  name: Piece de combo 1
-  description: Infliger des degats lors de votre pioche
-  cost: 5
-  statusToApply: {fileID: 11400000, guid: 5639e10ff9b6acf409a17134078b88a2, type: 2}
+  name: Heal on begin turn
+  description: 
+  cost: 10
+  statusToApply: {fileID: 11400000, guid: b64729064363fb340b7ebe129c66ceae, type: 2}

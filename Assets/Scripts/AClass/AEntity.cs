@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,8 @@ public class AEntity : MonoBehaviour, IHealth
     public int maxMana;
     public int currentMana;
 
-    public Deck cardDeck;
+    [SerializeField] public List<AEffect> deck;
+    public List<AEffect> definitiveDeck;//ne pas modifier en runtime
     public List<Card> hand;
     public GameObject prefabCard;
 
@@ -19,16 +21,13 @@ public class AEntity : MonoBehaviour, IHealth
     public Slider sliderLife;
     public Slider sliderMana;
 
-
-    protected virtual void Start()
-    {        
-        GameEventManager.instance.Subscribe(EventType.OnCardDraw, AddCardToHand);
-        GameEventManager.instance.Subscribe(EventType.OnTurnStart, DrawCard);
-        GameEventManager.instance.Subscribe(EventType.OnTurnStart, TurnStart);
-        
-
+    private void Awake()
+    {
         currentHealth = maxHealth;
         currentMana = maxMana;
+
+        deck = definitiveDeck.CloneViaSerialization();
+        deck.Shuffle();
 
         if (sliderLife)
         {
@@ -41,8 +40,13 @@ public class AEntity : MonoBehaviour, IHealth
             sliderMana.maxValue = maxMana;
             sliderMana.value = currentMana;
         }
-        //Debug.Log("Subscribe deck");
-        
+    }
+
+    protected virtual void Start()
+    {        
+        GameEventManager.instance.Subscribe(EventType.OnCardDraw, AddCardToHand);
+        GameEventManager.instance.Subscribe(EventType.OnTurnStart, DrawCard);
+        GameEventManager.instance.Subscribe(EventType.OnTurnStart, TurnStart);  
     }
 
     public void TakeDamage(int damage, object[] argV)
@@ -54,8 +58,23 @@ public class AEntity : MonoBehaviour, IHealth
             sliderLife.value = currentHealth;
         }
         //Debug.Log("Dmg");
-        
+
+        foreach (var item in argV)
+        {
+            Debug.Log(item.GetType());
+        }
+
         GameEventManager.instance.CallEvent(EventType.OnDamage, argV);
+    }
+
+    public void Heal(int damage)
+    {
+        currentHealth += damage;
+
+        if (sliderLife)
+        {
+            sliderLife.value = currentHealth;
+        }           
     }
 
     public bool UpdateManaValue(int value)

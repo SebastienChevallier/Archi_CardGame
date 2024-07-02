@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e4aa559ab717b4cb4453a63db3759f, type: 3}
   m_Name: ApplyStatusOnDamage
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Presque inifini
+  description: Piocher si vous subissez des degats
   cost: 1
   statusToApply: {fileID: 11400000, guid: 487ed4318fa0de645bf515dd3a38f788, type: 2}

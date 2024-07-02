@@ -13,17 +13,15 @@ public class DamageOnDraw : Status
         {
             Debug.Log(item.GetType());
         }*/
-        PlayingEntity enumPlayingEntity = (PlayingEntity)argV[1];
-        AEntity origin = (AEntity)argV[2];
-        AEntity target = (AEntity)argV[3];
-
-        object[] arg = new object[] { enumPlayingEntity, origin , target };
+        PlayingEntity enumPlayingEntity = (PlayingEntity)argV[0];
+        AEntity origin = (AEntity)argV[1];
+        AEntity target = (AEntity)argV[2];        
 
         if (entityPlaying == enumPlayingEntity)
         {
             if (nbTurnActive < numberOfTurn)
             {                
-                target.TakeDamage(damageValue, arg);
+                target.TakeDamage(damageValue, argV);
                 nbTurnActive++;
             }
             else

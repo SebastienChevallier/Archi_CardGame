@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : AEntity
@@ -10,11 +11,11 @@ public class PlayerController : AEntity
 
     public override void AddCardToHand(object[] argV)
     {
-        if ((PlayingEntity)argV[1] == PlayingEntity.Ennemy) { return; }
+        if ((PlayingEntity)argV[0] == PlayingEntity.Ennemy) { return; }
 
         GameObject obj = Instantiate(prefabCard, handParent.transform);
         Card card = obj.GetComponent<Card>();
-        card.cardData = (AEffect)argV[0];
+        card.cardData = (AEffect)argV[3];
         card.Init();
         hand.Add(card);
     }
@@ -25,12 +26,18 @@ public class PlayerController : AEntity
 
         if ((PlayingEntity)argV[0] == PlayingEntity.Ennemy) { return; }
 
-        if(cardDeck.deck.Count > 0)
+        if(deck.Count > 0)
         {
-            AEffect effect = cardDeck.deck[cardDeck.deck.Count - 1];
-            cardDeck.deck.Remove(effect);
-            var arg = new object[] { effect, argV[0], argV[1], argV[2] };
+            AEffect effect = deck[deck.Count - 1];
+            deck.Remove(effect);
+            var arg = new object[] { argV[0], argV[1], argV[2], effect };
             GameEventManager.instance.CallEvent(EventType.OnCardDraw, arg);
+        }
+
+        if (deck.Count <= 0)
+        {
+            deck = definitiveDeck.CloneViaSerialization();
+            deck.Shuffle();
         }
     }
 

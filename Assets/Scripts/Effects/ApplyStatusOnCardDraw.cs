@@ -10,10 +10,10 @@ public class ApplyStatusOnCardDraw : AEffect
     {
         if (statusToApply != null)
         {
-            Debug.Log("UseStatusCard");
-            AEntity targetEntity = (AEntity)argV[0];
+            
+            AEntity targetEntity = (AEntity)argV[2];
             Status status = statusToApply.Clone();
-            status.entityPlaying = (PlayingEntity)argV[2];
+            status.entityPlaying = (PlayingEntity)argV[0];
             targetEntity.CurrentStatus.Add(status);
             GameEventManager.instance.Subscribe(EventType.OnCardDraw, status.Use);
         }
